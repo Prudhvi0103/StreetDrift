@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './Config/db.js';
 import connectCloudinary from './Config/cloudinary.js';
-import adminRoute from './Routes/adminroute.js';
+import adminRoute from './Routes/adminRoute.js';
 
 
 const app = express()
