@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch('http://localhost:4700/');
+        const response = await fetch('https://streetdrift.onrender.com/');
         // If using a proxy, use: const response = await fetch('/prod');
         if (!response.ok) {
           throw new Error('Failed to fetch car data');

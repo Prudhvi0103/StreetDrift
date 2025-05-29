@@ -62,7 +62,7 @@ const AdminDashboard = () => {
         setLoading(true);
         try {
             console.log('Fetching cars with token:', token);
-            const response = await fetch('http://localhost:3277/admin/cars', {
+            const response = await fetch('https://streetdrift.onrender.com/admin/cars', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
     const handleApprove = async (car_id) => {
         try {
             const token = JSON.parse(localStorage.getItem('Admin')).adminToken;
-            const response = await fetch(`http://localhost:3277/cars/${car_id}/approve`, {
+            const response = await fetch(`https://streetdrift.onrender.com/cars/${car_id}/approve`, {
                 method: 'PATCH',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -222,7 +222,7 @@ const AdminDashboard = () => {
                 formData: Object.fromEntries(formData),
             });
 
-            const response = await fetch(`http://localhost:3277/admin/cars/${editCar.car_id}`, {
+            const response = await fetch(`https://streetdrift.onrender.com/admin/cars/${editCar.car_id}`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -310,7 +310,7 @@ const AdminDashboard = () => {
                 formData: Object.fromEntries(formData),
             });
 
-            const response = await fetch('http://localhost:3277/admin/cars', {
+            const response = await fetch('https://streetdrift.onrender.com/admin/cars', {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${token}`,
