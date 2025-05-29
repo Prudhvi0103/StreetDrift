@@ -1,0 +1,255 @@
+/* Header.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  z-index: 1001;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+}
+
+.logo-container h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.navlinks-container {
+  display: flex;
+  align-items: center;
+}
+
+.nav-lists {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-lists li {
+  margin-left: 1.5rem;
+}
+
+.nav-lists li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-lists li a:hover {
+  color: #ff4d4d;
+}
+
+.desktop-search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #333;
+  border-radius: 4px 0 0 4px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+  outline: none;
+  width: 200px;
+  transition: width 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  background-color: #ff4d4d;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #e63939;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Mobile search header */
+.mobile-search-header {
+  display: none;
+  width: 80%; /* adjusted width to make it centered */
+  padding: 0.5rem 1rem;
+  background-color: #1a1a1a;
+  position: fixed;
+  top: 70px;
+  left: 10%; /* remove this line or adjust it to calculate the correct left position */
+  transform: translateX(-50%); /* add this line to center horizontally */
+  left: 50%; /* add this line to center horizontally */
+  z-index: 999;
+  border-top: 1px solid #333;
+}
+
+
+.mobile-search-container {
+  display: flex;
+  width: 100%;
+}
+
+/* Tablet and Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .desktop-search-container {
+    display: none;
+  }
+
+  .mobile-search-header {
+    display: block;
+  }
+
+  .navlinks-container {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: #1a1a1a;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 80px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .navlinks-container.open {
+    right: 0;
+  }
+
+  .overlay {
+    display: block;
+  }
+
+  .nav-lists {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .nav-lists li {
+    margin: 1rem 0;
+    width: 100%;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .header {
+    padding: 0.75rem;
+  }
+
+  .mobile-search-header {
+    top: 60px;
+    padding: 0.5rem;
+  }
+
+  .logo-img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .logo-container h3 {
+    font-size: 1.2rem;
+  }
+
+  .hamburger {
+    font-size: 1.2rem;
+  }
+
+  .nav-lists li a {
+    font-size: 0.9rem;
+  }
+
+  .search-input {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .search-button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Large Screens (min-width: 1200px) */
+@media (min-width: 1200px) {
+  .header {
+    padding: 1rem 3rem;
+  }
+
+  .search-input {
+    width: 250px;
+  }
+
+  .logo-container h3 {
+    font-size: 1.75rem;
+  }
+
+  .nav-lists li a {
+    font-size: 1.1rem;
+  }
+}

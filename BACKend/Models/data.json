@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "model": "ferrari",
+        "modelYear": "2021",
+        "engineType": "petrol",
+        "carType": "manual",
+        "location": "",
+        "image": "https://wallpapers.com/images/featured/ferrari-cglqdk3qgwuhk35k.jpg",
+        "condition": "good"
+    },
+    {
+        "id": 3,
+        "model": "Rangerover",
+        "modelYear": "2021",
+        "engineType": "electrical",
+        "carType": "Automation",
+        "location": "Vizianagaram",
+        "image": "https://img.autocarindia.com/model/uploads/modelimages/Land-Rover-Range-Rover-Velar-120420241604.jpg?w=872&h=578&q=75&c=1",
+        "condition": "good"
+    },
+    {
+        "id": 4,
+        "model": "Lomborgini-veneno",
+        "modelYear": "2021",
+        "engineType": "",
+        "carType": "automation",
+        "location": "Vijayawada",
+        "image": "https://stimg.cardekho.com/images/carexteriorimages/930x620/Lamborghini/Huracan-EVO/10643/1690010999692/front-left-side-47.jpg",
+        "condition": "good"
+    },
+    {
+        "id": 5,
+        "model": "mustang",
+        "modelYear": "2024",
+        "engineType": "",
+        "carType": "manual",
+        "location": "",
+        "image": "https://hips.hearstapps.com/hmg-prod/images/2019-ford-mustang-shelby-gt-s-lead2-1566224220.jpg",
+        "condition": "good"
+    }
+]

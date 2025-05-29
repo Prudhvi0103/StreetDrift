@@ -1,0 +1,98 @@
+// import mongoose from "mongoose";
+
+car_schema----------------------------------------
+// const carSchema = new mongoose.Schema({
+//     car_id:{
+//         type:String,
+//         required:true
+//     },
+//     car_name:{
+//         type:String,
+//         required:true
+//     },
+//     car_model:{
+//         type:String,
+//         required:true
+//     },
+//     car_type:{
+//         type:String,
+//         required:true
+//     },
+//     car_enginetype:{
+//         type:String,
+//         required:true
+//     },
+//     car_price:{
+//         type:Number,
+//         required:true
+//     },
+//     image:{
+//         type:String,
+//         required:true
+//     },
+    
+//     avaliable:{
+//         type:Boolean,
+//         required:true
+//     },
+
+// },{minimize:false})
+
+// const carModel = mongoose.models.car || mongoose.model('cars', carSchema)
+
+// export default carModel;
+
+----------------------------------------------------------------
+const prodData = './Models/data.json'
+
+const readFile = () => {
+    try {
+        const data = fs.readFileSync(prodData, 'utf-8') || []
+        // console.log(data)
+        return JSON.parse(data) || []
+
+    } catch (error) {
+        console.log(error)
+        return error.message || []
+    }
+}
+app.get('/', (req, res) => {
+    const data = readFile()
+
+    res.json(data)
+})
+
+app.post('/prod', (req, res) => {
+    const data = readFile()
+    const id = data ? data[data.length-1].id + 1 : 1;
+    data.push({ id, ...req.body })
+
+    fs.writeFileSync(prodData, JSON.stringify(data), "utf-8") // Fix: prodData instead of prodDataData
+    res.json(data)
+})
+
+app.put('/prod/:id', (req, res) => {
+    const data = readFile()
+    const id = parseInt(req.params.id)
+    const index = data.findIndex(item => item.id === id)
+    if (index !== -1) {
+        data[index] = { id, ...req.body }
+        fs.writeFileSync(prodData, JSON.stringify(data), "utf-8")
+        res.json(data[index])
+    } else {
+        res.status(404).json({ message: 'Product not found' })
+    }
+})
+
+app.delete('/prod/:id', (req, res) => {
+    const data = readFile()
+    const id = parseInt(req.params.id)
+    const index = data.findIndex(item => item.id === id)
+    if(index !== -1) {
+      const deletedProduct = data.splice(index, 1)
+      fs.writeFileSync(prodData, JSON.stringify(data), "utf-8")
+      res.json(deletedProduct[0])
+    } else {
+      res.status(404).json({message: 'Product not found'})
+    }
+  })

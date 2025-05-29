@@ -1,0 +1,374 @@
+/* src/components/admin/AdminDashboard.css */
+.admin-dashboard {
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  padding: clamp(1rem, 3vw, 3rem);
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dashboard-title {
+  text-align: center;
+  margin-top: clamp(500px, 10vw, 500px);  /*---------------------*/
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+}
+
+.car-category {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.category-title {
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 600;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  color: #ff4d4d;
+  letter-spacing: 0.03em;
+}
+
+.car-card {
+  background-color: #2a2a2a;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.car-image {
+  object-fit: cover;
+  width: 1rem; /* Add this line */
+
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: clamp(120px, 20vw, 160px);
+  background-color: #3a3a3a;
+}
+
+.car-card .MuiCardContent-root {
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.car-card .MuiTypography-h6 {
+  color: red;
+  font-weight: 600;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* ------------------------------------------------------------------------------------------- */
+.car-card .MuiTypography-body2 {
+  color: black;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  margin-bottom: 0.4rem;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  margin-top: clamp(0.75rem, 2vw, 1rem);
+}
+
+.approve-button {
+  background-color: #ff4d4d !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  padding: clamp(0.4rem, 1.5vw, 0.6rem) clamp(0.8rem, 2vw, 1.2rem) !important;
+  min-width: 100px;
+  transition: background-color 0.3s ease;
+}
+
+.approve-button:hover {
+  background-color: #e63939 !important;
+}
+
+.edit-button {
+  border-color: #ff4d4d !important;
+  color: #ff4d4d !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  padding: clamp(0.4rem, 1.5vw, 0.6rem) clamp(0.8rem, 2vw, 1.2rem) !important;
+  min-width: 100px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #ff4d4d !important;
+  color: #ffffff !important;
+}
+
+.add-car-button {
+  background-color: #4caf50 !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 2vw, 1.5rem) !important;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.add-car-button:hover {
+  background-color: #45a049 !important;
+}
+
+.edit-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(300px, 90vw, 550px);
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #2a2a2a;
+  padding: clamp(1rem, 3vw, 2rem);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+
+.modal-title {
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  font-weight: 600;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  color: #ff4d4d;
+}
+
+.edit-modal .MuiTextField-root {
+  margin-bottom: clamp(0.75rem, 2vw, 1rem);
+}
+
+.edit-modal .MuiInputBase-root {
+  background-color: #3a3a3a;
+  color: #ffffff;
+  border-radius: 6px;
+}
+
+.edit-modal .MuiInputLabel-root {
+  color: #999;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+}
+
+.edit-modal .MuiInputLabel-root.Mui-focused,
+.edit-modal .MuiInputLabel-root.filled {
+  color: #ff4d4d;
+}
+
+.edit-modal .MuiOutlinedInput-notchedOutline {
+  border-color: #333;
+}
+
+.edit-modal .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #ff4d4d !important;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  justify-content: flex-end;
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+}
+
+.save-button {
+  background-color: #ff4d4d !important;
+  color: #ffffff !important;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 2vw, 1.5rem) !important;
+}
+
+.save-button:hover {
+  background-color: #e63939 !important;
+}
+
+.cancel-button {
+  border-color: #ff4d4d !important;
+  color: #ff4d4d !important;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 2vw, 1.5rem) !important;
+}
+
+.cancel-button:hover {
+  background-color: #ff4d4d !important;
+  color: #ffffff !important;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.error-message {
+  text-align: center;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: #ff4d4d;
+  margin: 2rem 0;
+}
+
+.no-cars {
+  text-align: center;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  color: #cccccc;
+  margin: 2rem 0;
+}
+
+@media (min-width: 1400px) {
+  .admin-dashboard {
+    padding: 4rem;
+  }
+
+  .dashboard-title {
+    font-size: 3.2rem;
+  }
+
+  .category-title {
+    font-size: 2.4rem;
+  }
+
+  .car-card .MuiCardContent-root {
+    padding: 1.5rem;
+  }
+
+  .edit-modal {
+    width: 600px;
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .admin-dashboard {
+    padding: 2.5rem;
+  }
+
+  .dashboard-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1.5rem;
+  }
+
+  .dashboard-title {
+    font-size: 2.2rem;
+  }
+
+  .category-title {
+    font-size: 1.8rem;
+  }
+
+  .car-card {
+    margin: 0 auto;
+  }
+
+  .car-card .MuiCardContent-root {
+    padding: 1rem;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .approve-button,
+  .edit-button,
+  .add-car-button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .edit-modal {
+    width: 95vw;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard-title {
+    font-size: 1.8rem;
+  }
+
+  .category-title {
+    font-size: 1.5rem;
+  }
+
+  .car-card .MuiTypography-h6 {
+    font-size: 1.1rem;
+  }
+
+  .car-card .MuiTypography-body2 {
+    font-size: 0.85rem;
+  }
+
+  .car-image {
+    height: 120px;
+  }
+
+  .approve-button,
+  .edit-button,
+  .add-car-button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem !important;
+  }
+
+  .edit-modal {
+    padding: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.3rem;
+  }
+
+  .modal-actions .MuiButton-root {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .dashboard-title {
+    font-size: 1.6rem;
+  }
+
+  .category-title {
+    font-size: 1.3rem;
+  }
+
+  .car-card .MuiTypography-h6 {
+    font-size: 1rem;
+  }
+
+  .car-card .MuiTypography-body2 {
+    font-size: 0.8rem;
+  }
+
+  .approve-button,
+  .edit-button,
+  .add-car-button {
+    font-size: 0.8rem;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+}

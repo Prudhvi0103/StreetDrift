@@ -1,0 +1,167 @@
+/* src/components/admin/AdminAuth.css */
+.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  padding: 1rem;
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.top-btn {
+  border-color: #ff4d4d !important;
+  color: #ffffff !important;
+}
+
+.top-btn .link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.top-btn .link:hover {
+  color: #ff4d4d;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.mainContainer h1 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.authWrapper {
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo .Image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.loginContainer {
+  background-color: #2a2a2a;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #ff4d4d;
+}
+
+#adminLoginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auth-textfield {
+  margin-bottom: 1rem;
+}
+
+.auth-textfield .MuiInputBase-root {
+  background-color: #3a3a3a;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.auth-textfield .MuiInputBase-input {
+  padding: 0.75rem;
+}
+
+.auth-textfield .MuiOutlinedInput-notchedOutline {
+  border-color: #333;
+}
+
+.auth-textfield:hover .MuiOutlinedInput-notchedOutline,
+.auth-textfield .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #ff4d4d !important;
+}
+
+.auth-textfield .MuiInputLabel-root {
+  color: #999;
+  font-size: 0.9rem;
+  transform: translate(14px, 12px) scale(1);
+}
+
+.auth-textfield .MuiInputLabel-root.Mui-focused,
+.auth-textfield .MuiInputLabel-root.filled {
+  color: #ff4d4d;
+  transform: translate(14px, -6px) scale(0.75);
+  background-color: #2a2a2a;
+  padding: 0 0.25rem;
+}
+
+.auth-button {
+  background-color: #ff4d4d !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.75rem !important;
+  border-radius: 4px !important;
+}
+
+.auth-button:hover {
+  background-color: #e63939 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .mainContainer h1 {
+    font-size: 1.5rem;
+  }
+
+  .loginContainer {
+    padding: 1.5rem;
+  }
+
+  .logo .Image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .auth-textfield .MuiInputLabel-root {
+    font-size: 0.8rem;
+  }
+
+  .auth-textfield .MuiInputLabel-root.Mui-focused,
+  .auth-textfield .MuiInputLabel-root.filled {
+    font-size: 0.65rem;
+  }
+
+  .auth-button {
+    padding: 0.6rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .top-buttons {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+}
