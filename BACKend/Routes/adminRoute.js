@@ -1,5 +1,5 @@
 import express from "express";
-import {addCar,adminLogin,getCars,addAdmin,editCar} from '../controllers/adminController.js';
+import {addCar,adminLogin,getCars,addAdmin,editCar} from '../Controllers/adminController.js';
 import upload from "../Middleware/multer.js";
 import {password,adminPassword } from "../Middleware/validations.js";
 
