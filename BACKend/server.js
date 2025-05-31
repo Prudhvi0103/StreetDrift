@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from './Config/db.js';
 import connectCloudinary from './Config/cloudinary.js';
 import adminRoute from './Routes/adminRoute.js';
+import userRoute from './Routes/userRoute.js';
 
 
 const app = express()
@@ -16,6 +17,7 @@ app.use(express.json())
 
 
 app.use('/admin', adminRoute)
+app.use('/',userRoute)
   
 
 connectDB()

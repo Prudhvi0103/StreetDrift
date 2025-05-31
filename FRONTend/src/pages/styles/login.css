@@ -1,0 +1,111 @@
+/* src/styles/login.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  padding: 1rem;
+}
+
+.login-form {
+  background-color: #2a2a2a;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form h2 {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.login-form-group {
+  margin-bottom: 1rem;
+}
+
+.login-form-group .MuiTextField-root {
+  width: 100%;
+}
+
+.login-form-group .MuiInputBase-root {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.login-form-group .MuiInputLabel-root {
+  color: #ffffff;
+}
+
+.login-form-group .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: #333;
+}
+
+.login-form-group .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #ff4d4d;
+}
+
+.login-form-group .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #ff4d4d;
+}
+
+.login-form-group .MuiInputBase-input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff !important;
+  background-color: #ff4d4d !important;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #e63939 !important;
+}
+
+.login-link {
+  color: #ffffff;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-link a {
+  color: #ff4d4d;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+.Toastify__toast--success {
+  background-color: #4caf50 !important;
+  color: #ffffff !important;
+}
+.Toastify__toast--error {
+  background-color: #f44336 !important;
+  color: #ffffff !important;
+}
+@media (max-width: 480px) {
+  .login-form {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .login-form h2 {
+    font-size: 1.3rem;
+  }
+}

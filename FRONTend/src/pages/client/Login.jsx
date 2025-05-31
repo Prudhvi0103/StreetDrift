@@ -1,71 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { TextField, Button } from '@mui/material';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/auth.css';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login success
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const validateForm = () => {
+    if (!formData.email || !formData.password) {
+      return { isValid: false, message: 'Please fill in all fields' };
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      return { isValid: false, message: 'Please enter a valid email address' };
+    }
+
+    return { isValid: true };
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
 
-    if (!email || !password) {
-      setError('Please fill in all fields');
+    const validation = validateForm();
+    if (!validation.isValid) {
+      toast.error(validation.message, { position: 'top-right' });
       return;
     }
 
     try {
-      const response = await axios.post('https://streetdrift.onrender.com/admin/login', {
-        email,
-        password,
+      const response = await fetch('http://localhost:3277/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      localStorage.setItem('token', response.data.token);
-      navigate('/home');
+
+      const data = await response.json();
+
+      if (response.ok && data.status) { // Changed data.success to data.status
+        toast.success(data.message, { position: 'top-right' });
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+        }
+        setIsLoggedIn(true); // Set flag to trigger navigation
+      } else {
+        toast.error(data.message || 'Login failed. Please try again.', { position: 'top-right' });
+      }
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      toast.error('Network error. Please try again.', { position: 'top-right' });
+      console.error(err);
     }
   };
+
+  // Fallback navigation using useEffect
+  useEffect(() => {
+    if (isLoggedIn) {
+      const timer = setTimeout(() => {
+        console.log('Navigating to /home'); // Debug log
+        navigate('/home', { replace: true }); // Ensure navigation happens
+      }, 3000);
+      return () => clearTimeout(timer); // Cleanup timer on unmount
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <section className="auth-container">
       <div className="auth-form">
         <h2>Login to Street Drift</h2>
-        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+            <TextField
               required
+              label="Email"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              fullWidth
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+            <TextField
               required
+              label="Password"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              autoComplete="current-password"
+              fullWidth
             />
           </div>
-          <button type="submit" className="auth-button">
+          <Button type="submit" variant="contained" className="auth-button">
             Login
-          </button>
+          </Button>
         </form>
         <p className="auth-link">
           Don't have an account? <Link to="/register">Register here</Link>
         </p>
+        <p className="auth-link">
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </p>
       </div>
+      <ToastContainer />
     </section>
   );
 }

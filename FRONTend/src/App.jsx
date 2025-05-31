@@ -11,6 +11,8 @@ import Register from './pages/client/Register';
 import ServiceBanner from './Components/servicebanner';
 import AdminLogin from './pages/admin/Adminlogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import CarFilter from './Components/CarFilter';
+import Booking from './pages/client/Booking';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +30,8 @@ function App() {
       <Route path='/services' element={<ServiceBanner />} />
       <Route path='/admin/login' element={<AdminLogin />} />
       <Route path='/admin/dashboard' element={<AdminDashboard />} />
+      <Route path="/cars/:category" element={<CarFilter />} />
+      <Route path="/booking/:car_id" element={<Booking />} />
       
       
     </Routes>

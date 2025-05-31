@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { TextField, Button, Radio, FormLabel, FormControlLabel, RadioGroup } from '@mui/material';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/auth.css';
 
 function Register() {
@@ -10,37 +12,111 @@ function Register() {
     password: '',
     mobileNumber: '',
     age: '',
+    gender: 'female', // Default to match schema
+    address: {
+      landmark: '',
+      city: '',
+      pincode: '',
+    },
   });
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Handle nested address fields
+    if (name.startsWith('address.')) {
+      const addressField = name.split('.')[1];
+      setFormData({
+        ...formData,
+        address: {
+          ...formData.address,
+          [addressField]: value,
+        },
+      });
+    } else {
+      // Convert age and mobileNumber to numbers
+      const updatedValue =
+        name === 'age' || name === 'mobileNumber' ? (value === '' ? '' : Number(value)) : value;
+      setFormData({ ...formData, [name]: updatedValue });
+    }
+  };
+
+  const validateForm = () => {
+    const requiredFields = ['name', 'email', 'password', 'mobileNumber', 'age', 'gender'];
+
+    // Check if required fields are filled
+    for (let field of requiredFields) {
+      const value = formData[field];
+      if (
+        value === undefined ||
+        value === null ||
+        (typeof value === 'string' && value.trim() === '') ||
+        (typeof value === 'number' && (isNaN(value) || value <= 0))
+      ) {
+        return { isValid: false, message: 'Please fill all required fields!' };
+      }
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      return { isValid: false, message: 'Please enter a valid email address!' };
+    }
+
+    // Mobile number must be 10 digits
+    if (!/^\d{10}$/.test(formData.mobileNumber)) {
+      return { isValid: false, message: 'Mobile number must be 10 digits!' };
+    }
+
+    // Age must be between 18 and 100
+    if (formData.age < 18 || formData.age > 100) {
+      return { isValid: false, message: 'Age must be between 18 and 100!' };
+    }
+
+    return { isValid: true };
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
 
-    if (!formData.name || !formData.email || !formData.password || !formData.mobileNumber || !formData.age) {
-      setError('Please fill in all fields');
+    const validation = validateForm();
+    if (!validation.isValid) {
+      toast.error(validation.message, { position: 'top-right' });
       return;
     }
-    if (!/^\d{10}$/.test(formData.mobileNumber)) {
-      setError('Mobile number must be 10 digits');
-      return;
-    }
-    if (formData.age < 18 || formData.age > 100) {
-      setError('Age must be between 18 and 100');
-      return;
+
+    // Prepare data to send (omit address if all fields are empty to use schema default)
+    const dataToSend = { ...formData };
+    const isAddressEmpty =
+      !formData.address.landmark && !formData.address.city && !formData.address.pincode;
+    if (isAddressEmpty) {
+      delete dataToSend.address; // Let schema use default
     }
 
     try {
-      const response = await axios.post('https://streetdrift.onrender.com/users', formData);
-      localStorage.setItem('token', response.data.token);
-      navigate('/home');
+      const response = await fetch('http://localhost:3277/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast.success(data.message, { position: 'top-right' });
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+        }
+        setTimeout(() => navigate('/home'), 3000); // 3-second delay before redirect
+      } else {
+        toast.error(data.message || 'Registration failed', { position: 'top-right' });
+      }
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      toast.error('Network error. Please try again.', { position: 'top-right' });
+      console.error(err);
     }
   };
 
@@ -48,76 +124,120 @@ function Register() {
     <section className="auth-container">
       <div className="auth-form">
         <h2>Register for Street Drift</h2>
-        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
+            <TextField
+              required
+              label="Name"
               type="text"
-              id="name"
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter your name"
-              required
+              fullWidth
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
+            <TextField
+              required
+              label="Email"
               type="email"
-              id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
-              required
+              fullWidth
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
+            <TextField
+              required
+              label="Password"
               type="password"
-              id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              required
+              autoComplete="new-password"
+              fullWidth
             />
           </div>
           <div className="form-group">
-            <label htmlFor="mobileNumber">Mobile Number</label>
-            <input
+            <TextField
+              required
+              label="Mobile Number"
               type="tel"
-              id="mobileNumber"
               name="mobileNumber"
               value={formData.mobileNumber}
               onChange={handleChange}
               placeholder="Enter your mobile number"
-              required
+              fullWidth
             />
           </div>
           <div className="form-group">
-            <label htmlFor="age">Age</label>
-            <input
+            <TextField
+              required
+              label="Age"
               type="number"
-              id="age"
               name="age"
               value={formData.age}
               onChange={handleChange}
               placeholder="Enter your age"
-              required
+              InputProps={{ inputProps: { min: 18, max: 100 } }}
+              fullWidth
             />
           </div>
-          <button type="submit" className="auth-button">
+          <div className="form-group">
+            <FormLabel required>Gender</FormLabel>
+            <RadioGroup row name="gender" value={formData.gender} onChange={handleChange}>
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="other" control={<Radio />} label="Other" />
+            </RadioGroup>
+          </div>
+          {/* Optional Address Fields */}
+          <div className="form-group">
+            <TextField
+              label="Landmark"
+              type="text"
+              name="address.landmark"
+              value={formData.address.landmark}
+              onChange={handleChange}
+              placeholder="Enter landmark (optional)"
+              fullWidth
+            />
+          </div>
+          <div className="form-group">
+            <TextField
+              label="City"
+              type="text"
+              name="address.city"
+              value={formData.address.city}
+              onChange={handleChange}
+              placeholder="Enter city (optional)"
+              fullWidth
+            />
+          </div>
+          <div className="form-group">
+            <TextField
+              label="Pincode"
+              type="text"
+              name="address.pincode"
+              value={formData.address.pincode}
+              onChange={handleChange}
+              placeholder="Enter pincode (optional)"
+              fullWidth
+            />
+          </div>
+          <Button type="submit" variant="contained" className="auth-button">
             Register
-          </button>
+          </Button>
         </form>
         <p className="auth-link">
           Already have an account? <Link to="/login">Login here</Link>
         </p>
       </div>
+      <ToastContainer />
     </section>
   );
 }

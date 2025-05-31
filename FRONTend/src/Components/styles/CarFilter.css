@@ -1,0 +1,124 @@
+.car-filter-container {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Add this to center horizontally */
+  align-items: center;
+  margin-bottom: 20px;
+  
+}
+
+.back-button {
+  background-color: #6c757d; /* Gray to distinguish from Book Now */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 20px;
+}
+
+.back-button:hover {
+  background-color: #5a6268;
+}
+
+.filter-heading {
+  text-align: center;
+  font-size: 2rem;
+  margin: 0;
+  color: #333;
+  text-transform: capitalize;
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.car-card {
+  
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+}
+
+.car-image-container {
+  width: 100%;
+  height: 150px;
+}
+
+.car-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.car-details {
+  margin-top: 1.5rem;
+  padding: 15px;
+}
+
+.car-name {
+  font-size: 1.25rem;
+  margin: 0 0 10px;
+  color: #222;
+}
+
+.car-model, .car-type, .car-enginetype, .car-price, .car-availability {
+  font-size: 1rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+.car-price {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.car-availability {
+  color: #28a745;
+}
+
+.car-availability.not-available {
+  color: #dc3545;
+}
+
+.book-now-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.book-now-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.book-now-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.loading, .error, .no-cars {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin: 20px 0;
+}
